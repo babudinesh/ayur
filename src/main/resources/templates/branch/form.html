@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Registration Branch</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Branch</h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Registration Branch</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Branch</h3>
+            <div class="box-tools pull-right">
+               <!--  <a href="/branch/add" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a> -->
+            </div>
+        </div>
+        <form data-toggle="validator" role="form" th:object="${branch}" th:action="@{/branch/save}" method="post">
+            <div class="box-body">
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="form-group">
+                    <label for="Firstname">Name</label>
+                    <input type="text" required="true" class="form-control" th:field="*{name}" id="name" />
+                </div>
+                
+                
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Branch List</h3>
+            <div class="box-tools pull-right">
+                <!-- <a href="/customers/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a> -->
+                <br clear="all" />
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    
+                </tr>
+                <tr th:each="row : ${list}">
+                    <td th:text="${row.id}"></td>
+                     <td th:text="${row.name}"></td>
+                       
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</div>
+</body>
+</html>
