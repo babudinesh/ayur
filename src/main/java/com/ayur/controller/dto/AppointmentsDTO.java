@@ -1,4 +1,4 @@
-package com.hendisantika.adminlte.controller.dto;
+package com.ayur.controller.dto;
 
 import java.util.Date;
 

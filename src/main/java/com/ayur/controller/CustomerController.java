@@ -1,10 +1,10 @@
-package com.hendisantika.adminlte.controller;
+package com.ayur.controller;
 
-import com.hendisantika.adminlte.model.Appointments;
-import com.hendisantika.adminlte.model.Customers;
-import com.hendisantika.adminlte.repository.AppointmentRepository;
-import com.hendisantika.adminlte.service.AppointmentService;
-import com.hendisantika.adminlte.service.CustomersService;
+import com.ayur.model.Appointments;
+import com.ayur.model.Customers;
+import com.ayur.repository.AppointmentRepository;
+import com.ayur.service.AppointmentService;
+import com.ayur.service.CustomersService;
 
 import java.util.List;
 

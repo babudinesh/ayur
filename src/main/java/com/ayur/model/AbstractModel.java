@@ -1,4 +1,4 @@
-package com.hendisantika.adminlte.model;
+package com.ayur.model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

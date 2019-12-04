@@ -1,4 +1,4 @@
-package com.hendisantika.adminlte;
+package com.ayur;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -1,9 +1,9 @@
-package com.hendisantika.adminlte.repository;
+package com.ayur.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.hendisantika.adminlte.model.Appointments;
+import com.ayur.model.Appointments;
 
 
 @Repository

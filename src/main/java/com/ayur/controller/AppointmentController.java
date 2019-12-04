@@ -1,4 +1,4 @@
-package com.hendisantika.adminlte.controller;
+package com.ayur.controller;
 
 import java.util.List;
 
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hendisantika.adminlte.controller.dto.AppointmentsDTO;
-import com.hendisantika.adminlte.model.Appointments;
-import com.hendisantika.adminlte.model.Branch;
-import com.hendisantika.adminlte.repository.AppointmentRepository;
-import com.hendisantika.adminlte.repository.BranchRepository;
-import com.hendisantika.adminlte.service.AppointmentService;
+import com.ayur.controller.dto.AppointmentsDTO;
+import com.ayur.model.Appointments;
+import com.ayur.model.Branch;
+import com.ayur.repository.AppointmentRepository;
+import com.ayur.repository.BranchRepository;
+import com.ayur.service.AppointmentService;
 
 @RestController
 public class AppointmentController {

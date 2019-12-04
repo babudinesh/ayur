@@ -1,12 +1,13 @@
-package com.hendisantika.adminlte.service;
+package com.ayur.service;
 
 
-import com.hendisantika.adminlte.model.AbstractModel;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ayur.model.AbstractModel;
 
 import java.io.Serializable;
 

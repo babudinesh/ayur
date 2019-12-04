@@ -1,4 +1,4 @@
-package com.hendisantika.adminlte.service;
+package com.ayur.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import com.hendisantika.adminlte.model.Appointments;
-import com.hendisantika.adminlte.repository.AppointmentRepository;
+import com.ayur.model.Appointments;
+import com.ayur.repository.AppointmentRepository;
 
 @Service
 public class AppointmentService extends AbstractService<Appointments, Long>{

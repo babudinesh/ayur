@@ -1,4 +1,4 @@
-package com.hendisantika.adminlte.security;
+package com.ayur.security;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

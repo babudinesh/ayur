@@ -1,4 +1,4 @@
-package com.hendisantika.adminlte.controller;
+package com.ayur.controller;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hendisantika.adminlte.model.Appointments;
-import com.hendisantika.adminlte.model.Branch;
-import com.hendisantika.adminlte.repository.BranchRepository;
-import com.hendisantika.adminlte.service.AppointmentService;
-import com.hendisantika.adminlte.service.BranchService;
+import com.ayur.model.Appointments;
+import com.ayur.model.Branch;
+import com.ayur.repository.BranchRepository;
+import com.ayur.service.AppointmentService;
+import com.ayur.service.BranchService;
 
 
 @Controller
