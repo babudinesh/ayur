@@ -8,26 +8,43 @@
     <h1>Branch</h1>
     <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Registration Branch</li>
+        <li class="active">Branch Settings</li>
     </ol>
 </section>
 <div layout:fragment="content">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Branch</h3>
+            <h3 class="box-title">Branch Settings</h3>
             <div class="box-tools pull-right">
                <!--  <a href="/branch/add" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a> -->
             </div>
         </div>
-        <form data-toggle="validator" role="form" th:object="${branch}" th:action="@{/branch/save}" method="post">
+        <form data-toggle="validator" role="form" th:object="${branchSettings}" th:action="@{/branch-settings/save}" method="post">
             <div class="box-body">
                 <input type="hidden" th:field="*{id}"/>
 
-                <div class="form-group">
-                    <label for="Firstname">Name</label>
-                    <input type="text" required="true" class="form-control" th:field="*{name}" id="name" />
+                <div class="form-group" >
+                    <label for="Firstname">Branch</label>
+                    <select class="form-control" th:field="*{branch.id}"  id="dropOperator">
+					    <option value="0">Select Branch</option>
+					    <option th:each="row : ${list}" th:value="${row.id}" th:text="${row.name}"></option>
+				    </select>
                 </div>
-                
+                <div class="form-group">
+                    <label for="Firstname">Booking Date</label>
+                    <input type="date"  required="true" class="form-control" th:field="*{bookingDate}" id="name" />
+                </div>
+                <div class="form-group">
+                    <label for="Firstname">Appointment Count</label>
+                    <input type="number" required="true" class="form-control" th:field="*{appointmentCount}" id="name" />
+                </div>
+                <div class="form-group">
+                    <label for="Firstname">Status</label>
+                    <select class="form-control" th:field="*{status}">
+					    <option th:value="Active" th:text="Active"></option>
+					    <option th:value="InActive" th:text="InActive"></option>
+					</select>
+                </div>
                 
             </div>
             <div class="box-footer">
@@ -37,7 +54,7 @@
     </div>
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Branch List</h3>
+            <h3 class="box-title">Branch Settings List</h3>
             <div class="box-tools pull-right">
                 <!-- <a href="/customers/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a> -->
                 <br clear="all" />
@@ -47,12 +64,18 @@
             <table class="table table-striped">
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Branch</th>
+                    <th>Booking Date</th>
+                    <th>Appointment Count</th>
+                    <th>Status</th>
                     
                 </tr>
-                <tr th:each="row : ${list}">
+                <tr th:each="row : ${branchSettingsList}">
                     <td th:text="${row.id}"></td>
-                     <td th:text="${row.name}"></td>
+                     <td th:text="${row.branch.name}"></td>
+                     <td th:text="${#dates.format(row.bookingDate, 'yyyy-MM-dd')}"></td>
+                     <td th:text="${row.appointmentCount}"></td>
+                     <td th:text="${row.status}"></td>
                        
                 </tr>
             </table>
