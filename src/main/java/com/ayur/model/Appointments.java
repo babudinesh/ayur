@@ -46,6 +46,9 @@ public class Appointments extends AbstractModel<Long>{
 	@Column(name = "dateCreated", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
     private Date dateCreated;
 	
+	@Column
+    private String appointmentId;
+	
 	
 
 }

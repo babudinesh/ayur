@@ -16,6 +16,7 @@ import com.ayur.model.Branch;
 import com.ayur.repository.AppointmentRepository;
 import com.ayur.repository.BranchRepository;
 import com.ayur.service.AppointmentService;
+import com.ayur.service.SmsService;
 
 @RestController
 public class AppointmentController {
@@ -29,6 +30,9 @@ public class AppointmentController {
 	@Autowired
     private BranchRepository branchRepository;
 	
+	@Autowired
+	private SmsService smsService;
+	
 	 @RequestMapping(value = "/appointment/save", method = RequestMethod.POST,consumes="application/json")
 	 public Appointments save(@RequestBody AppointmentsDTO appointmentDTO) {
 
@@ -40,8 +44,9 @@ public class AppointmentController {
 	     appointment.setDescription(appointmentDTO.getDescription());
 	     appointment.setMobile(appointmentDTO.getMobile());
 	     appointment.setName(appointmentDTO.getName());
-		 Appointments save = appointmentRepository.save(appointment);
-	       
+	     appointment.setAppointmentId(appointmentService.generateAppointmentId(appointment));
+		 Appointments save = appointmentService.save(appointment);
+		 smsService.sendSms(appointment);
 	        return save ;
 
 	    }

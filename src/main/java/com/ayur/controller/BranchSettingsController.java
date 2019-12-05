@@ -39,6 +39,7 @@ public class BranchSettingsController {
     @RequestMapping(value = "/branch-settings/save" , method = RequestMethod.POST)
     public String save(BranchSettings branchSettings, final RedirectAttributes ra) {
 
+        branchSettings.setBookingCount(Long.valueOf("0"));
         branchSettingsRepository.save(branchSettings);
         return "redirect:/branch-settings";
 

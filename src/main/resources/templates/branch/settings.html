@@ -67,6 +67,7 @@
                     <th>Branch</th>
                     <th>Booking Date</th>
                     <th>Appointment Count</th>
+                    <th>Booking Count</th>
                     <th>Status</th>
                     
                 </tr>
@@ -75,6 +76,7 @@
                      <td th:text="${row.branch.name}"></td>
                      <td th:text="${#dates.format(row.bookingDate, 'yyyy-MM-dd')}"></td>
                      <td th:text="${row.appointmentCount}"></td>
+                     <td th:text="${row.bookingCount}"></td>
                      <td th:text="${row.status}"></td>
                        
                 </tr>

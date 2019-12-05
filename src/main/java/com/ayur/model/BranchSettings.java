@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -44,6 +45,9 @@ public class BranchSettings extends AbstractModel<Long>{
     
     @Column
     private Long appointmentCount;
+    
+    @Column(nullable=true)
+    private Long bookingCount;
     
     @Column(name = "dateCreated", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
     private Date dateCreated;

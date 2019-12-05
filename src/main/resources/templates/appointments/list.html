@@ -24,6 +24,7 @@
             <table class="table table-striped">
                 <tr>
                     <th>ID</th>
+                    <th>Appointment ID</th>
                     <th>Name</th>
                     <th>Mobile</th>
                     <th>Booking Date</th>
@@ -33,6 +34,7 @@
                 </tr>
                 <tr th:each="row : ${list}">
                     <td th:text="${row.id}"></td>
+                    <td th:text="${row.appointmentId}"></td>
                      <td th:text="${row.name}"></td>
                      <td th:text="${row.mobile}"></td>
                        <td th:text="${#dates.format(row.bookingDate, 'yyyy/MM/dd')}"></td>
