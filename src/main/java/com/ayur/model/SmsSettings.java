@@ -35,5 +35,8 @@ public class SmsSettings extends AbstractModel<Long>{
     @Column
     private String senderId;
     
+    @Column
+    private Status status;
+    
     
 }
