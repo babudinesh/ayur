@@ -27,8 +27,7 @@ public class BranchController {
 	 @Autowired
 	 private BranchRepository branchRepository;
 	 
-	 @Autowired
-	    private AppointmentService appointmentService;
+	
 	
 	@RequestMapping("/branch")
     public String add(Model model) {
@@ -68,13 +67,7 @@ public class BranchController {
 
 	    }
 
-	 @RequestMapping(value = "/appointments", method = RequestMethod.GET)
-     public String list(Model model) {
-          List<Appointments> list = appointmentService.findAll();
-          model.addAttribute("list", list);
-          return "appointments/list";
-
-      }
+	
 	 
 	
 }
