@@ -1,0 +1,16 @@
+paytm.payment:
+  sandbox:
+    merchantId: wNutke38239007895590
+    merachantKey: MQEg&cAp@mKXn2Kz
+    channelId: WEB
+    website: WEBSTAGING
+    industryTypeId: Retail
+    paytmUrl: https://securegw-stage.paytm.in/order/process
+    callbackUrl: http://localhost:8080/ayur/success
+    details:
+      MID: ${paytm.payment.sandox.merchantid}
+      CHANNEL_ID: ${paytm.payment.sandox.channelid}
+      INDUSTRY_TYPE_ID: ${paytm.payment.sandox.industrytypeid}
+      WEBSITE: ${paytm.payment.sandox.website}
+      CALLBACK_URL: ${paytm.payment.sandox.callbackurl}
+      

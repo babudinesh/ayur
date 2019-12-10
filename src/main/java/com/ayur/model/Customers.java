@@ -15,16 +15,18 @@ import java.util.Date;
 @ToString
 public class Customers extends AbstractModel<Long> {
 
-    @Column(nullable = false, length = 40)
+    @Column(nullable = false, length = 75)
     private String firstname;
 
     @Column(nullable = false, length = 40)
     private String lastname;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    private Long mobile;
 
-    @Column(name = "added_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
-    private Date addedDate;
+    @Column(name = "date_created", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+    private Date dateCreated;
 
+    @Column(nullable = true, length = 500)
+    private String address;
 }

@@ -15,6 +15,7 @@ public class SistemApplication  extends SpringBootServletInitializer{
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 	    // TODO Auto-generated method stub
+	    System.setProperty("spring.config.name", "application");
 	    return builder.sources(SistemApplication.class);
 	}
 	

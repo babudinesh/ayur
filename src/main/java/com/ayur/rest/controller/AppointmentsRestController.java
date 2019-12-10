@@ -47,6 +47,12 @@ public class AppointmentsRestController {
          appointment.setAppointmentId(appointmentService.generateAppointmentId(appointment));
          Appointments save = appointmentService.save(appointment);
          smsService.sendSms(appointment);
+         try {
+            appointmentService.generatePaymentLink();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
             return save ;
 
         }

@@ -1,0 +1,97 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Clients</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Appointments</h1>
+    <div class="login-block text-center" >
+	   	<span><font size="5" style="color: green;" th:text="${message}"> </font></span>
+	</div>
+<ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Appointment View</li>
+</ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+    
+        <div class="box-header with-border">
+            <h3 class="box-title">Appointment Details</h3>
+            <div class="box-tools pull-right">
+                <br clear="all" />
+            </div>
+        </div>
+        <div class="panel panel-default">
+	        <div class="row">
+				<div class="col-md-5 cc-margin-bottom">
+				<label>Appointment Id:</label>
+					<div class="bor_btm" th:text="${appointment.appointmentId}"></div>
+				</div>
+				<div class="col-md-5 cc-margin-bottom">
+				<label>Booking Date:</label>
+					<div class="bor_btm" th:text="${appointment.bookingDate}"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 cc-margin-bottom">
+				<label>Name:</label>
+					<div class="bor_btm" th:text="${appointment.name}"></div>
+				</div>
+				<div class="col-md-5 cc-margin-bottom">
+				<label>Mobile:</label>
+					<div class="bor_btm" th:text="${appointment.mobile}"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 cc-margin-bottom">
+				<label>Address:</label>
+					<div class="bor_btm" th:text="${appointment.address}"></div>
+				</div>
+				<div class="col-md-5 cc-margin-bottom">
+				<label>Description:</label>
+					<div class="bor_btm" th:text="${appointment.description}"></div>
+				</div>
+			</div>
+            
+        </div>
+        
+    </div>
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Diagnosis Details</h3>
+            <div class="box-tools pull-right">
+               <!--  <a href="/branch/add" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a> -->
+            </div>
+        </div>
+        <form data-toggle="validator" role="form" th:object="${prescription}" th:action="@{/savePrescription}" method="post">
+            <div class="box-body">
+				<input type="hidden" th:value="${appointment.id}" th:attr="name='appointmentId'" />
+                <div class="form-group">
+                    <label for="Firstname">Diagnosis</label>
+                    <input type="text" required="true" class="form-control" th:field="*{diagnosis}" id="disagnosis" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="Firstname">Description</label>
+                    <input type="text" required="true" class="form-control" th:field="*{description}" id="description" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="Firstname">Next Visit Date</label>
+                    <input type="date" required="false" class="form-control" th:field="*{nextVisitDate}" id="nextVisitDate" />
+                </div>
+                
+                
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

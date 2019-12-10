@@ -6,14 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ayur.controller.dto.AppointmentsDTO;
+import com.ayur.controller.dto.PrescriptionDTO;
 import com.ayur.model.Appointments;
 import com.ayur.model.Branch;
+import com.ayur.model.Prescription;
 import com.ayur.repository.AppointmentRepository;
 import com.ayur.repository.BranchRepository;
 import com.ayur.service.AppointmentService;
@@ -30,6 +34,15 @@ public class AppointmentController {
          List<Appointments> list = appointmentService.findAll();
          model.addAttribute("list", list);
          return "appointments/list";
+
+     }
+    
+    @RequestMapping(value = "/view-appointment", method = RequestMethod.GET)
+    public String getAppointmentDetails(@RequestParam(value = "id", required = true)  Long id,Model model) {
+         Appointments appointment = appointmentService.findOne(id);
+         model.addAttribute("appointment", appointment);
+         model.addAttribute("prescription", new PrescriptionDTO());
+         return "appointments/view";
 
      }
     

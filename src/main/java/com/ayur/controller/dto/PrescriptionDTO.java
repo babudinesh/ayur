@@ -1,0 +1,27 @@
+package com.ayur.controller.dto;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.ayur.model.Appointments;
+import com.ayur.model.Customers;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class PrescriptionDTO {
+
+    private Long appointmentId;
+    private String diagnosis;
+    private String description;
+    private String nextVisitDate;
+}
