@@ -1,0 +1,66 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Create Appointment</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Appointment</h1>
+    <div class="login-block text-center" >
+	   	<span><font size="5" style="color: green;" th:text="${#httpServletRequest.getParameter('message')}"> </font></span>
+	</div>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Create Appointment</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"> Appointment</h3>
+            <div class="box-tools pull-right">
+               <!--  <a href="/branch/add" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a> -->
+            </div>
+        </div>
+        <form data-toggle="validator" role="form" th:object="${appointment}" th:action="@{/save-appointment}" method="post">
+            <div class="box-body">
+
+
+				<div class="form-group" >
+                    <label for="Firstname">Create Appointment</label>
+                    <select class="form-control" th:field="*{branch}"  id="dropOperator">
+					    <option value="0">Select Branch</option>
+					    <option th:each="row : ${list}" th:value="${row.id}" th:text="${row.name}"></option>
+				    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Firstname">Name</label>
+                    <input type="text" required="true" class="form-control" th:field="*{name}" id="name" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="Firstname">Mobile</label>
+                    <input type="text" required="true" class="form-control" th:field="*{mobile}" id="name" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="Firstname">Booking Date</label>
+                    <input type="date"  required="true" class="form-control" th:field="*{bookingDate}" id="name" />
+                </div>
+                <div class="form-group">
+                    <label for="Firstname">Address</label>
+                    <textarea rows="5" required="true" class="form-control" th:field="*{address}" id="name" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="Firstname">Description</label>
+                    <textarea rows="5" required="true" class="form-control" th:field="*{description}" id="name" ></textarea>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
