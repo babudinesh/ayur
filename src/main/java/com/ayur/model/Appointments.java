@@ -49,6 +49,9 @@ public class Appointments extends AbstractModel<Long>{
 	@Column
     private String appointmentId;
 	
+	@Column
+	private PaymentStatus paymentStatus;
+	
 	
 
 }

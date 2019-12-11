@@ -16,7 +16,7 @@ public class AppointmentsDTO {
     
     private Long mobile;
     
-    private Date bookingDate;
+    private String bookingDate;
     
     private Long branch;
     

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import org.json.simple.parser.*;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,10 @@ import org.springframework.stereotype.Service;
 import com.ayur.controller.dto.AppointmentsDTO;
 import com.ayur.model.Appointments;
 import com.ayur.model.BranchSettings;
+import com.ayur.payments.PaymentLinkResponse;
 import com.ayur.repository.AppointmentRepository;
 import com.ayur.repository.BranchSettingsRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paytm.pg.merchant.CheckSumServiceHelper;
 
 @Service
@@ -32,6 +35,9 @@ public class AppointmentService extends AbstractService<Appointments, Long> {
 
     @Autowired
     private BranchSettingsRepository branchSettingsRepository;
+    
+    @Autowired
+    private SmsService smsService;
 
     @Override
     protected JpaRepository<Appointments, Long> getRepository() {
@@ -67,7 +73,7 @@ public class AppointmentService extends AbstractService<Appointments, Long> {
     }
 
     
-    public void generatePaymentLink() throws Exception {
+    public void generatePaymentLink(Appointments appointments) throws Exception {
         JSONObject paytmParams = new JSONObject();
 
         /* body parameters */
@@ -132,6 +138,9 @@ public class AppointmentService extends AbstractService<Appointments, Long> {
             BufferedReader responseReader = new BufferedReader(new InputStreamReader(is));
             if ((responseData = responseReader.readLine()) != null) {
                 System.out.append("Response: " + responseData);
+                PaymentLinkResponse paymentLinkResponse = new ObjectMapper().readValue(responseData, PaymentLinkResponse.class);
+                System.out.println(paymentLinkResponse.getBody().getLinkId());
+                smsService.sendPaymentNotification(appointments, paymentLinkResponse);
             }
             // System.out.append("Request: " + post_data);
             responseReader.close();

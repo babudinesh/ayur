@@ -1,6 +1,8 @@
 package com.ayur.rest.controller;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +15,7 @@ import com.ayur.controller.dto.AppointmentsDTO;
 import com.ayur.model.Appointments;
 import com.ayur.model.Branch;
 import com.ayur.model.BranchSettings;
+import com.ayur.model.PaymentStatus;
 import com.ayur.repository.BranchRepository;
 import com.ayur.repository.BranchSettingsRepository;
 import com.ayur.service.AppointmentService;
@@ -34,25 +37,22 @@ public class AppointmentsRestController {
     private BranchSettingsRepository branchSettingsRepository;
     
      @RequestMapping(value = "/appointment/save", method = RequestMethod.POST,consumes="application/json")
-     public Appointments save(@RequestBody AppointmentsDTO appointmentDTO) {
+     public Appointments save(@RequestBody AppointmentsDTO appointmentDTO) throws ParseException {
 
          Branch branch = branchRepository.findOne(appointmentDTO.getBranch());
          Appointments appointment = new Appointments();
          appointment.setAddress(appointmentDTO.getAddress());
-         appointment.setBookingDate(appointmentDTO.getBookingDate());
+         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+         appointment.setBookingDate(formatter.parse(appointmentDTO.getBookingDate()));
          appointment.setBranch(branch);
          appointment.setDescription(appointmentDTO.getDescription());
          appointment.setMobile(appointmentDTO.getMobile());
          appointment.setName(appointmentDTO.getName());
          appointment.setAppointmentId(appointmentService.generateAppointmentId(appointment));
+         appointment.setPaymentStatus(PaymentStatus.Done);
          Appointments save = appointmentService.save(appointment);
          smsService.sendSms(appointment);
-         try {
-            appointmentService.generatePaymentLink();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+         
             return save ;
 
         }

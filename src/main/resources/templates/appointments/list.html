@@ -17,11 +17,12 @@
         <div class="box-header with-border">
             <h3 class="box-title">Appointment List</h3>
             <div class="box-tools pull-right">
+                <a class="btn btn-primary" href="add-appointment">Create Appointment</a>
                 <br clear="all" />
             </div>
         </div>
         <div class="box-body no-padding">
-            <table class="dataTables_wrapper form-inline dt-bootstrap">
+            <table class="table table-striped">
                 <tr>
                     <th>ID</th>
                     <th>Appointment ID</th>
@@ -31,6 +32,7 @@
                      <th>Address</th>
                       <th>Branch</th>
                       <th>Description</th>
+                      <th>Payment</th>
                 </tr>
                 <tr th:each="row : ${list}">
                     <td th:text="${row.id}"></td>
@@ -41,6 +43,7 @@
                         <td th:text="${row.address}"></td>
                         <td th:text="${row.branch.name}"></td>
                         <td th:text="${row.description}"></td>
+                        <td th:text="${row.paymentStatus}"></td>
                 </tr>
             </table>
         </div>
