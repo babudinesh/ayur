@@ -124,7 +124,9 @@ public class PaymentController {
         }
     
     @RequestMapping(value="/success")
-    public void paymentSuccess() {
+    public void paymentSuccess(HttpServletRequest request,HttpServletResponse response) {
+        System.out.println(request.getParameter("STATUS"));
+        System.out.println(request.getParameter("PAYMENTMODE"));
         System.out.println("Success");
     }
     

@@ -25,16 +25,16 @@
             <table class="table table-striped">
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
                     <th>Registration Date</th>
                     <th>Action</th>
                 </tr>
                 <tr th:each="row : ${list}">
                     <td th:text="${row.id}"></td>
                     <td th:text="${row.firstname + ' ' + row.lastname}"></td>
-                    <td th:text="${row.email}"></td>
-                    <td th:text="${#dates.format(row.addedDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${row.mobile}"></td>
+                    <td th:text="${#dates.format(row.dateCreated, 'dd/MM/yyyy')}"></td>
                     <td>
                         <a th:href="${'/customers/edit/' + row.id}">edit</a> -
                         <a th:href="${'/customers/delete/' + row.id}">delete</a>
@@ -42,15 +42,7 @@
                 </tr>
             </table>
         </div>
-        <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="/customers/1">Primeira</a></li>
-                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
-                    <a th:href="${'/customers/' + p}" th:text="${p}"></a>
-                </li>
-                <li><a th:href="${'/customers/' + endIndex}">Última</a></li>
-            </ul>
-        </div>
+        
     </div>
 </div>
 </body>

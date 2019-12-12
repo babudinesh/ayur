@@ -33,8 +33,18 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customers")
-    public String index() {
-        return "redirect:/customers/1";
+    public String index(Model model) {
+        Page<Customers> page = customerService.getList(1);
+
+        int current = page.getNumber() + 1;
+        int begin = Math.max(1, current - 5);
+        int end = Math.min(begin + 10, page.getTotalPages());
+
+        model.addAttribute("list", page);
+        model.addAttribute("beginIndex", begin);
+        model.addAttribute("endIndex", end);
+        model.addAttribute("currentIndex", current);
+        return "customers/list";
     }
 
     @RequestMapping(value = "/customers/{pageNumber}", method = RequestMethod.GET)

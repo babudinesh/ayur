@@ -1,8 +1,13 @@
 package com.ayur.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -93,5 +98,24 @@ public class AppointmentController {
          return "appointments/create";
 
      }
+    
+    @RequestMapping(value = "/appointment/save", method = RequestMethod.POST)
+    public void  save(HttpServletRequest request,HttpServletResponse response) throws ParseException, IOException {
+        Branch branch = branchRepository.findOne(Long.parseLong(request.getParameter("branch")));
+        Appointments appointment = new Appointments();
+        appointment.setAddress(request.getParameter("address"));
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        appointment.setBookingDate(formatter.parse(request.getParameter("date")));
+        appointment.setBranch(branch);
+        appointment.setDescription(request.getParameter("description"));
+        appointment.setMobile(Long.parseLong(request.getParameter("mobile")));
+        appointment.setName(request.getParameter("name"));
+        appointment.setAppointmentId(appointmentService.generateAppointmentId(appointment));
+        appointment.setPaymentStatus(PaymentStatus.Pending);
+        Appointments save = appointmentService.save(appointment);
+          // return save ;
+        response.sendRedirect("http://"+request.getServerName()+":"+request.getServerPort()+""+request.getContextPath()+"/pgredirect?orderId="+appointment.getAppointmentId()+"&custId="+appointment.getId()+"&mobile="+appointment.getMobile());
+
+       }
 
 }

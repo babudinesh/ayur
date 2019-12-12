@@ -34,7 +34,7 @@ public class SmsService extends AbstractService<SmsSettings, Long>{
                         " at " + appointment.getBranch().getName()+ " branch,Your appointment id: "+ appointment.getAppointmentId()+", Thank You.";
                 
                 String data = "username=" + URLEncoder.encode(smsSettings.getUsername(), "UTF-8");
-                data += "&password=" + URLEncoder.encode(smsSettings.getPassword(), "UTF-8");
+                data += "&password=" + (smsSettings.getPassword());
                 data += "&to=" + URLEncoder.encode("91"+appointment.getMobile().toString(), "UTF-8");
                 data += "&from=" + URLEncoder.encode(smsSettings.getSenderId(), "UTF-8");
                 data += "&text=" + URLEncoder.encode(message, "UTF-8");
