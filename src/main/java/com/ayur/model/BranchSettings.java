@@ -36,7 +36,7 @@ public class BranchSettings extends AbstractModel<Long>{
     @JoinColumn(name = "branch", nullable = false)
     private Branch branch;
     
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+   @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column
     private Date bookingDate;
     

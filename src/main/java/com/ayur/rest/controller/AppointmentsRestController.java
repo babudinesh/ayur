@@ -42,20 +42,21 @@ public class AppointmentsRestController {
     
     
      
-     @RequestMapping(value = "/appointment/check-availability", method = RequestMethod.GET)
-     public String checkAvailability(@RequestParam("bookingDate") Date bookingDate,@RequestParam("branchId") Long branchId) {
-
-         Branch branch = branchRepository.findOne(branchId);
-         BranchSettings branchSettings= branchSettingsRepository.findByBranchAndBookingDate(branch,(bookingDate));
-         String availability = "Not Available";
-         if(branchSettings!=null) {
-              if(branchSettings.getAppointmentCount() - branchSettings.getBookingCount()> 0) {
-                  availability = "Available";
-              }
-              
-         }
-         return availability;
+    @RequestMapping(value = "/appointment/check-availability", method = RequestMethod.GET)
+    public String checkAvailability(@RequestParam("bookingDate") String bookingDate,@RequestParam("branchId") Long branchId) throws ParseException {
+   	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+   	 
+        Branch branch = branchRepository.findOne(branchId);
+        BranchSettings branchSettings= branchSettingsRepository.findByBranchAndBookingDate(branch,formatter.parse(bookingDate));
+        String availability = "Not Available";
+        if(branchSettings!=null) {
+             if(branchSettings.getAppointmentCount() - branchSettings.getBookingCount()> 0) {
+                 availability = "Available";
+             }
+             
         }
+        return availability;
+       }
      
      
 }
