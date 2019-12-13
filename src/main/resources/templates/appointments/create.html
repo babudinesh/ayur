@@ -28,7 +28,7 @@
 
 				<div class="form-group" >
                     <label for="Firstname">Create Appointment</label>
-                    <select class="form-control" th:field="*{branch}"  id="branch">
+                    <select class="form-control" th:field="*{branch}"  id="dropOperator">
 					    <option value="0">Select Branch</option>
 					    <option th:each="row : ${list}" th:value="${row.id}" th:text="${row.name}"></option>
 				    </select>
@@ -40,31 +40,27 @@
                 
                 <div class="form-group">
                     <label for="Firstname">Mobile</label>
-                    <input type="text" required="true" class="form-control" th:field="*{mobile}" id="mobile" />
+                    <input type="text" required="true" class="form-control" th:field="*{mobile}" id="name" />
                 </div>
                 
                 <div class="form-group">
                     <label for="Firstname">Booking Date</label>
-                    <input type="date" id="bookingDate"  required="true" class="form-control" th:field="*{bookingDate}"  onchange="checkAvailability();"/>
-                    <span id="availability"></span>
+                    <input type="date"  required="true" class="form-control" th:field="*{bookingDate}" id="name" />
                 </div>
                 <div class="form-group">
                     <label for="Firstname">Address</label>
-                    <textarea rows="5" required="true" class="form-control" th:field="*{address}" id="address" ></textarea>
+                    <textarea rows="5" required="true" class="form-control" th:field="*{address}" id="name" ></textarea>
                 </div>
                 <div class="form-group">
                     <label for="Firstname">Description</label>
-                    <textarea rows="5" required="true" class="form-control" th:field="*{description}" id="description" ></textarea>
+                    <textarea rows="5" required="true" class="form-control" th:field="*{description}" id="name" ></textarea>
                 </div>
             </div>
             <div class="box-footer">
-                <button type="submit" id="btnSubmit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
     </div>
 </div>
-<script>
-
-</script>
 </body>
 </html>

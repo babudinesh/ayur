@@ -60,11 +60,9 @@ public class PaytmPaymentController {
     @RequestMapping(value="/payment-callback")
     public ModelAndView paymentSuccess(@RequestParam("custId") Long appointmentId, HttpServletRequest request,HttpServletResponse response) {
         String message ;
-        String appId = "0";
         if(request.getParameter("STATUS").equalsIgnoreCase("TXN_SUCCESS")) {
             Appointments appointment = appointmentRepository.findOne(appointmentId);
             appointment.setPaymentStatus(PaymentStatus.Done);
-            appId = appointment.getAppointmentId();
             appointmentRepository.save(appointment);
             smsService.sendSms(appointment);
             message = "Appointment booked successfully";
@@ -73,8 +71,7 @@ public class PaytmPaymentController {
         }
         System.out.println(request.getParameter("STATUS"));
         System.out.println(request.getParameter("RESPMSG"));
-        ModelAndView modelAndView = new ModelAndView("redirect: http://"+request.getServerName()+":"+request.getServerPort()+"/ayurvedic?message="+message+"&appointmentId="
-                + ""+appId);
+        ModelAndView modelAndView = new ModelAndView("redirect: http://"+request.getServerName()+":"+request.getServerPort()+"/ayurvedic?message="+message);
         return modelAndView;
         
     }
