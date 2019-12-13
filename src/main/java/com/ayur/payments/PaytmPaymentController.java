@@ -68,6 +68,7 @@ public class PaytmPaymentController {
             appointmentRepository.save(appointment);
             smsService.sendSms(appointment);
             message = "Appointment booked successfully";
+            
         }else {
             message = "Sorry cannot book appointment !..";
         }
