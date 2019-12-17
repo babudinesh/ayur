@@ -25,27 +25,29 @@
             </div>
         </div>
         <div class="panel panel-default">
-	        <div class="row">
-				<div class="col-md-5 cc-margin-bottom">
+	        <div class="box-body">
+				<div class="col-md-2 cc-margin-bottom">
 				<label>Appointment Id:</label>
 					<div class="bor_btm" th:text="${appointment.appointmentId}"></div>
 				</div>
-				<div class="col-md-5 cc-margin-bottom">
+				<div class="col-md-2 cc-margin-bottom">
 				<label>Booking Date:</label>
-					<div class="bor_btm" th:text="${appointment.bookingDate}"></div>
+					<div class="bor_btm" th:text="${#dates.format(appointment.bookingDate, 'yyyy-MM-dd')}"></div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-5 cc-margin-bottom">
+				<div class="col-md-2 cc-margin-bottom">
 				<label>Name:</label>
 					<div class="bor_btm" th:text="${appointment.name}"></div>
 				</div>
-				<div class="col-md-5 cc-margin-bottom">
+				<div class="col-md-2 cc-margin-bottom">
 				<label>Mobile:</label>
 					<div class="bor_btm" th:text="${appointment.mobile}"></div>
 				</div>
+				<div class="col-md-2 cc-margin-bottom">
+				<label>Patient ID:</label>
+					<div class="bor_btm" th:text="${customer.customerId}"></div>
+				</div>
 			</div>
-			<div class="row">
+			<div class="box-body">
 				<div class="col-md-5 cc-margin-bottom">
 				<label>Address:</label>
 					<div class="bor_btm" th:text="${appointment.address}"></div>
@@ -59,6 +61,121 @@
         </div>
         
     </div>
+    <form data-toggle="validator" role="form" th:object="${prescription}" th:action="@{/savePrescription}" method="post">
+    <div class="box">
+    <div class="panel panel-default">
+    <div class="box-header with-border">
+            <h3 class="box-title">Medical History</h3>
+            <div class="box-tools pull-right">
+                <br clear="all" />
+            </div>
+        </div>
+	        <div class="box-body">
+	        <div class="col-md-2 cc-margin-bottom">
+				<label>Age:</label>
+					<input type="text"  class="form-control" th:field="${customer.age}"  th:value="${customer.age}" id="age" name="age" />
+				</div>
+				<div class="col-md-2 cc-margin-bottom">
+				<label>Gender:</label>
+					    <input type="radio" name="gender" 
+					         th:text="Male" value="Male" th:checked="${#strings.equals(customer.gender, 'Male')}"/>
+					    <input type="radio" name="gender" 
+					         th:text="Female" value="Female" th:checked="${#strings.equals(customer.gender, 'Female')}"/>
+				</div>
+				<div class="col-md-2 cc-margin-bottom">
+				<label>Date of Birth:</label>
+					<input type="date"  class="form-control" th:field="${customer.dateOfBirth}"  id="dob" name="dob" />
+				</div>
+				<div class="col-md-2 cc-margin-bottom">
+				<label>Blood Group:</label>
+					<input type="text"  class="form-control" th:field="${medicalHistory.bloodGroup}"  name="bloodGroup" />
+				</div>
+				<div class="col-md-2 cc-margin-bottom">
+				<label>Height:</label>
+					<input type="text"  class="form-control" th:field="${medicalHistory.height}"  name="height" />
+				</div>
+				<div class="col-md-2 cc-margin-bottom">
+				<label>Weight:</label>
+					<input type="text"  class="form-control" th:field="${medicalHistory.weight}"  name="weight" />
+				</div>
+			</div>
+			<div class="box-body">
+				<div class="col-md-1 cc-margin-bottom">
+				<label>Sugar:</label>
+					<input type="checkbox"  th:checked="${#strings.equals(medicalHistory.sugar, 'Yes')}" name="sugar"/>
+				</div>
+				<div class="col-md-1 cc-margin-bottom">
+				<label>B.P:</label>
+					<input type="checkbox"   th:checked="${#strings.equals(medicalHistory.bloodPressure, 'Yes')}" name="bloodPressure"/>
+				</div>
+				<div class="col-md-1 cc-margin-bottom">
+				<label>Thyroid:</label>
+					<input type="checkbox"   th:checked="${#strings.equals(medicalHistory.thyroid, 'Yes')}" name="thyroid"/>
+				</div>
+				<div class="col-md-1 cc-margin-bottom">
+				<label>Urine:</label>
+					<input type="checkbox" name="urine" th:checked="${#strings.equals(medicalHistory.urine, 'Yes')}"/>
+				</div>
+				<div class="col-md-1 cc-margin-bottom">
+				<label>Hungry:</label>
+					<input type="checkbox"  name="hungry" th:checked="${#strings.equals(medicalHistory.hungry, 'Yes')}"/>
+				</div>
+				<div class="col-md-1 cc-margin-bottom">
+				<label>Sleep:</label>
+					<input type="checkbox" name="sleep" th:checked="${#strings.equals(medicalHistory.sleep, 'Yes')}"/>
+				</div>
+				<div class="col-md-1 cc-margin-bottom">
+				<label>Motion:</label>
+					<input type="checkbox" name="motion" th:checked="${#strings.equals(medicalHistory.motion, 'Yes')}"/>
+				</div>
+				<div class="col-md-1 cc-margin-bottom">
+				<label>Tea:</label>
+					<input type="checkbox"  name="tea" th:checked="${#strings.equals(medicalHistory.tea, 'Yes')}"/>
+				</div>
+				<div class="col-md-1 cc-margin-bottom">
+				<label>Coffee:</label>
+					<input type="checkbox"  name="coffee" th:checked="${#strings.equals(medicalHistory.coffee, 'Yes')}"/>
+				</div>
+				<div class="col-md-2 cc-margin-bottom">
+				<label>FoodType:</label>
+					<input type="radio" name="foodType"
+					         th:text="Veg" value="Veg" th:checked="${#strings.equals(medicalHistory.foodType, 'Veg')}"/>
+					    <input type="radio"  name="foodType"
+					         th:text="NonVeg" value="NonVeg" th:checked="${#strings.equals(medicalHistory.foodType, 'NonVeg')}"/>
+				</div>
+			</div>
+			
+            
+        </div>
+        </div>
+        <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Prescription History</h3>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Diagnosis</th>
+                    <th>Description</th>
+                    <th>Next Visit</th>
+                    <th>Products</th>
+                    <th>Prescription Date</th>
+                </tr>
+                <tr th:each="row : ${prescriptionList}">
+                    <td th:text="${row.id}"></td>
+                    <td  th:text="${row.diagnosis}"></td>
+                     <td th:text="${row.description}"></td>
+                     
+                       <td th:text="${row.nextVisitDate !=null} ?  ${#dates.format(row.nextVisitDate, 'yyyy-MM-dd')}"></td>
+                       <td th:text="${row.products}"></td>
+                        <td th:text="${row.dateCreated}"></td>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+    
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Diagnosis Details</h3>
@@ -66,32 +183,41 @@
                <!--  <a href="/branch/add" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a> -->
             </div>
         </div>
-        <form data-toggle="validator" role="form" th:object="${prescription}" th:action="@{/savePrescription}" method="post">
+        
             <div class="box-body">
-				<input type="hidden" th:value="${appointment.id}" th:attr="name='appointmentId'" />
-                <div class="form-group">
+				<input type="hidden" th:value="${appointment.id}" th:attr="name='appointmentId'" name="appointmentId" />
+                <div class="form-group col-md-5">
                     <label for="Firstname">Diagnosis</label>
-                    <input type="text" required="true" class="form-control" th:field="*{diagnosis}" id="disagnosis" />
+                    <textarea required="true" class="form-control" th:field="*{diagnosis}" id="disagnosis" rows="4" cols="20" name="diagnosis" ></textarea>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group col-md-5">
                     <label for="Firstname">Description</label>
-                    <input type="text" required="true" class="form-control" th:field="*{description}" id="description" />
+                    <textarea required="true" class="form-control" th:field="*{description}" id="description" rows="4" cols="20" name="description" ></textarea>
                 </div>
                 
-                <div class="form-group">
+                
+            </div>
+            <div class="box-body">
+            	
+                <div class="form-group col-md-5" >
+                    <label for="Firstname">Product</label>
+                    <select class="form-control"  id="product" name="productList" multiple="multiple">
+					    <option value="0">Select Product</option>
+					    <option th:each="row : ${productList}" th:value="${row.productId}" th:text="${row.productName}"></option>
+				    </select>
+                </div>
+                <div class="form-group col-md-2">
                     <label for="Firstname">Next Visit Date</label>
-                    <input type="date" required="false" class="form-control" th:field="*{nextVisitDate}" id="nextVisitDate" />
+                    <input type="date"   th:field="*{nextVisitDate}" name="nextVisitDate"  />
                 </div>
-                
-                
             </div>
             <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
-        </form>
+        
     </div>
+    </form>
 </div>
-
 </body>
 </html>

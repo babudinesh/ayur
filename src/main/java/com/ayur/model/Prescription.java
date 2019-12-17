@@ -41,6 +41,9 @@ public class Prescription extends AbstractModel<Long>{
     @Column(nullable = true)
     private Date nextVisitDate;
     
+    @Column(nullable = true)
+    private String products;
+    
     @Column(name = "dateCreated", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
     private Date dateCreated;
 }

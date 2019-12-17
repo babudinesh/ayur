@@ -3,6 +3,8 @@ package com.ayur.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -26,11 +28,19 @@ import com.ayur.controller.dto.PrescriptionDTO;
 import com.ayur.model.Appointments;
 import com.ayur.model.Branch;
 import com.ayur.model.BranchSettings;
+import com.ayur.model.Customers;
+import com.ayur.model.FoodType;
+import com.ayur.model.Gender;
+import com.ayur.model.MedicalHistory;
 import com.ayur.model.PaymentStatus;
 import com.ayur.model.Prescription;
 import com.ayur.repository.AppointmentRepository;
 import com.ayur.repository.BranchRepository;
+import com.ayur.repository.CustomersRepository;
 import com.ayur.service.AppointmentService;
+import com.ayur.service.MedicalHistoryService;
+import com.ayur.service.PrescriptionService;
+import com.ayur.service.ProductService;
 import com.ayur.service.SmsService;
 
 @Controller
@@ -45,6 +55,18 @@ public class AppointmentController {
     @Autowired
     private SmsService smsService;
     
+    @Autowired
+    private CustomersRepository customersRepository;
+    
+    @Autowired
+    private MedicalHistoryService medicalHistoryService;
+    
+    @Autowired
+    private ProductService productService;
+    
+    @Autowired
+    private PrescriptionService prescriptionService;
+    
     @RequestMapping(value = "/appointments", method = RequestMethod.GET)
     public String list(Model model) {
          List<Appointments> list = appointmentService.findAll();
@@ -56,8 +78,17 @@ public class AppointmentController {
     @RequestMapping(value = "/view-appointment", method = RequestMethod.GET)
     public String getAppointmentDetails(@RequestParam(value = "id", required = true)  Long id,Model model) {
          Appointments appointment = appointmentService.findOne(id);
+         Customers customer = customersRepository.findByMobile(appointment.getMobile());
+         MedicalHistory medicalHistory = null ;
+         if(customer!=null) {
+             medicalHistory = medicalHistoryService.findByCustomer(customer);
+         }
          model.addAttribute("appointment", appointment);
+         model.addAttribute("customer", customer == null ?new Customers():customer);
+         model.addAttribute("medicalHistory", medicalHistory == null ?new MedicalHistory():medicalHistory);
          model.addAttribute("prescription", new PrescriptionDTO());
+         model.addAttribute("productList", productService.findAll());
+         model.addAttribute("prescriptionList", customer == null ?new ArrayList<>():prescriptionService.findByCustomer(customer));
          return "appointments/view";
 
      }

@@ -16,7 +16,11 @@ import java.util.Date;
 public class Customers extends AbstractModel<Long> {
 
     @Column(nullable = false, length = 75)
+    private String customerId;
+    
+    @Column(nullable = false, length = 75)
     private String firstname;
+    
 
     @Column(nullable = false, length = 40)
     private String lastname;
@@ -29,4 +33,13 @@ public class Customers extends AbstractModel<Long> {
 
     @Column(nullable = true, length = 500)
     private String address;
+    
+    @Column(nullable = true)
+    private Integer age;
+    
+    @Column(nullable = true)
+    private Gender gender;
+    
+    @Column(nullable = true)
+    private Date dateOfBirth;
 }

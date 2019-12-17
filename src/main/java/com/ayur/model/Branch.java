@@ -29,6 +29,9 @@ public class Branch extends AbstractModel<Long>{
 	@Column
 	private String name;
 	
+	@Column
+    private String code;
+	
 	@Column(name = "dateCreated", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
     private Date dateCreated;
 
