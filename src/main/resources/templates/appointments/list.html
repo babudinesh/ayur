@@ -1,54 +1,65 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
-    <title>Clients</title>
+<title>Clients</title>
 </head>
 <body>
-<section layout:fragment="header">
-    <h1>Appointments</h1>
-<ol class="breadcrumb">
-    <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li class="active">Appointments</li>
-</ol>
-</section>
-<div layout:fragment="content">
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">Appointment List</h3>
-            <div class="box-tools pull-right">
-                <a class="btn btn-primary" href="add-appointment">Create Appointment</a>
-                <br clear="all" />
-            </div>
-        </div>
-        <div class="box-body no-padding">
-            <table class="table table-striped">
-                <tr>
-                    <th>ID</th>
-                    <th>Appointment ID</th>
-                    <th>Name</th>
-                    <th>Mobile</th>
-                    <th>Booking Date</th>
-                     <th>Address</th>
-                      <th>Branch</th>
-                      <th>Description</th>
-                      <th>Payment</th>
-                </tr>
-                <tr th:each="row : ${list}">
-                    <td th:text="${row.id}"></td>
-                    <td> <a th:href="@{/view-appointment(id=${row.id})}" th:text="${row.appointmentId}"></a></td>
-                     <td th:text="${row.name}"></td>
-                     <td th:text="${row.mobile}"></td>
-                       <td th:text="${#dates.format(row.bookingDate, 'yyyy/MM/dd')}"></td>
-                        <td th:text="${row.address}"></td>
-                        <td th:text="${row.branch.name}"></td>
-                        <td th:text="${row.description}"></td>
-                        <td th:text="${row.paymentStatus}"></td>
-                </tr>
-            </table>
-        </div>
-        
-    </div>
-</div>
+	<section layout:fragment="header">
+		<h1>Appointments</h1>
+		<ol class="breadcrumb">
+			<li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+			<li class="active">Appointments</li>
+		</ol>
+	</section>
+	<div layout:fragment="content">
+		<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">Appointment List</h3>
+				<div class="box-tools pull-right">
+					<a class="btn btn-primary" href="add-appointment">Create
+						Appointment</a> <br clear="all" />
+				</div>
+			</div>
+			<div class="box-body no-padding">
+				<table class="table table-bordered table-striped myTable">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Appointment ID</th>
+							<th>Name</th>
+							<th>Mobile</th>
+							<th>Booking Date</th>
+							<th>Address</th>
+							<th>Branch</th>
+							<th>Description</th>
+							<th>Payment</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="row : ${list}">
+							<td th:text="${row.id}"></td>
+							<td><a th:href="@{/view-appointment(id=${row.id})}"
+								th:text="${row.appointmentId}"></a></td>
+							<td th:text="${row.name}"></td>
+							<td th:text="${row.mobile}"></td>
+							<td th:text="${#dates.format(row.bookingDate, 'yyyy/MM/dd')}"></td>
+							<td th:text="${row.address}"></td>
+							<td th:text="${row.branch.name}"></td>
+							<td th:text="${row.description}"></td>
+							<td th:text="${row.paymentStatus}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.myTable').DataTable();
+		});
+	</script>
 </body>
 </html>

@@ -28,3 +28,7 @@ function checkAvailability() {
 	    }
 	  });
 	}
+
+$(document).ready( function () {
+    $('.myTable').DataTable();
+} );

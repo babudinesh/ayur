@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Clients</title>
+    <title>Customers</title>
 </head>
 <body>
 <section layout:fragment="header">
-    <h1>Clients</h1>
+    <h1>Customer List</h1>
 <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
     <li class="active">Clients</li>
@@ -22,28 +22,42 @@
             </div>
         </div>
         <div class="box-body no-padding">
-            <table class="table table-striped">
+            <table class="table table-striped myTab">
+            <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Customer ID</th>
                     <th>Name</th>
                     <th>Mobile</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Address</th>
                     <th>Registration Date</th>
-                    <th>Action</th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr th:each="row : ${list}">
                     <td th:text="${row.id}"></td>
-                    <td th:text="${row.firstname + ' ' + row.lastname}"></td>
+                    <td th:text="${row.customerId}"></td>
+                    <td th:text="${row.firstname}"></td>
                     <td th:text="${row.mobile}"></td>
+                    <td th:text="${row.age}"></td>
+                    <td th:text="${row.gender}"></td>
+                    <td th:text="${#dates.format(row.dateOfBirth, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${row.address}"></td>
                     <td th:text="${#dates.format(row.dateCreated, 'dd/MM/yyyy')}"></td>
-                    <td>
-                        <a th:href="${'/customers/edit/' + row.id}">edit</a> -
-                        <a th:href="${'/customers/delete/' + row.id}">delete</a>
-                    </td>
                 </tr>
+                </tbody>
             </table>
         </div>
         
     </div>
 </div>
+<script>
+$(document).ready( function () {
+    $('.myTab').DataTable();
+} );
+</script>
 </body>
 </html>
