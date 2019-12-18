@@ -76,7 +76,7 @@ public class AppointmentController {
      }
     
     @RequestMapping(value = "/view-appointment", method = RequestMethod.GET)
-    public String getAppointmentDetails(@RequestParam(value = "id", required = true)  Long id,Model model) {
+    public String getAppointmentDetails(@RequestParam(value = "id", required = true)  Long id,Model model) throws Exception {
          Appointments appointment = appointmentService.findOne(id);
          Customers customer = customersRepository.findByMobile(appointment.getMobile());
          MedicalHistory medicalHistory = null ;
@@ -89,6 +89,7 @@ public class AppointmentController {
          model.addAttribute("prescription", new PrescriptionDTO());
          model.addAttribute("productList", productService.findAll());
          model.addAttribute("prescriptionList", customer == null ?new ArrayList<>():prescriptionService.findByCustomer(customer));
+         appointmentService.checkPaymentStatus(appointment);
          return "appointments/view";
 
      }
@@ -112,6 +113,7 @@ public class AppointmentController {
         ra.addAttribute("message", "Successfully created Appointment");
         try {
            appointmentService.generatePaymentLink(appointment);
+           
        } catch (Exception e) {
            // TODO Auto-generated catch block
            e.printStackTrace();

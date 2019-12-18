@@ -17,7 +17,7 @@
 <div layout:fragment="content">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title"> Appointment</h3>
+            <h3 class="box-title">Create Appointment</h3>
             <div class="box-tools pull-right">
                <!--  <a href="/branch/add" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a> -->
             </div>
@@ -26,33 +26,35 @@
             <div class="box-body">
 
 
-				<div class="form-group" >
+				<div class="form-group col-md-2 cc-margin-bottom" >
                     <label for="Firstname">Branch</label>
                     <select class="form-control" th:field="*{branch}"  id="branch">
 					    <option value="0">Select Branch</option>
 					    <option th:each="row : ${list}" th:value="${row.id}" th:text="${row.name}"></option>
 				    </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-3 cc-margin-bottom">
                     <label for="Firstname">Name</label>
                     <input type="text" required="true" class="form-control" th:field="*{name}" id="name" />
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group col-md-2 cc-margin-bottom">
                     <label for="Firstname">Mobile</label>
                     <input type="text" required="true" class="form-control" th:field="*{mobile}" id="mobile" />
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group col-md-2 cc-margin-bottom">
                     <label for="Firstname">Booking Date</label>
                     <input type="date" id="bookingDate"  required="true" class="form-control" th:field="*{bookingDate}"  onchange="checkAvailability();"/>
                     <span id="availability"></span>
                 </div>
-                <div class="form-group">
+                </div>
+                <div class="box-body">
+                <div class="form-group col-md-5 cc-margin-bottom">
                     <label for="Firstname">Address</label>
                     <textarea rows="5" required="true" class="form-control" th:field="*{address}" id="address" ></textarea>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-5 cc-margin-bottom">
                     <label for="Firstname">Description</label>
                     <textarea rows="5" required="true" class="form-control" th:field="*{description}" id="description" ></textarea>
                 </div>

@@ -52,6 +52,9 @@ public class Appointments extends AbstractModel<Long>{
 	@Column
 	private PaymentStatus paymentStatus;
 	
+	@Column
+	private String paymentLinkId;
+	
 	
 
 }
