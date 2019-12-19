@@ -89,7 +89,7 @@ public class AppointmentController {
          model.addAttribute("prescription", new PrescriptionDTO());
          model.addAttribute("productList", productService.findAll());
          model.addAttribute("prescriptionList", customer == null ?new ArrayList<>():prescriptionService.findByCustomer(customer));
-         appointmentService.checkPaymentStatus(appointment);
+        // appointmentService.checkPaymentStatus(appointment);
          return "appointments/view";
 
      }

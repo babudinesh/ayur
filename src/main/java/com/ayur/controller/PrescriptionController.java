@@ -1,6 +1,7 @@
 package com.ayur.controller;
 
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +41,8 @@ public class PrescriptionController {
         prescriptionDTO.setHungry(request.getParameter("hungry"));
         prescriptionDTO.setMotion(request.getParameter("motion"));
         prescriptionDTO.setNextVisitDate(request.getParameter("nextVisitDate"));
-        prescriptionDTO.setProductList(request.getParameter("productList"));
+        String[] values = request.getParameterValues("productList");
+        prescriptionDTO.setProductList(Arrays.asList(values).toString());
         prescriptionDTO.setSleep(request.getParameter("sleep"));
         prescriptionDTO.setSugar(request.getParameter("sugar"));
         prescriptionDTO.setTea(request.getParameter("tea"));
