@@ -222,4 +222,8 @@ public class AppointmentService extends AbstractService<Appointments, Long> {
             exception.printStackTrace();
         }
     }
+    
+    public List<Object[]> findByAppointmentDates(String fromDate,String toDate){
+        return appointmentRepository.findByAppointmentDates(fromDate, toDate);
+    }
 }

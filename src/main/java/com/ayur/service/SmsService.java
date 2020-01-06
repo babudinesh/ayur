@@ -119,4 +119,54 @@ public String sendPaymentNotification(Appointments appointment,PaymentLinkRespon
             return "Error " + e;
         }
     }
+
+
+public String sendMessage(String[] mobileNumbers,String  message) {
+    
+    try {
+        Long id = (long) 1;
+        SmsSettings smsSettings = smsSettingsRepository.findOne(id);
+        String mobile = "";
+        for (int i = 0; i < mobileNumbers.length; i++) {
+            mobile = mobile + "91" +mobileNumbers[i] + ",";
+        }
+        mobile = mobile.substring(0, mobile.length()-1);
+        System.out.println(mobile);
+        if(smsSettings.getStatus().equals(Status.Active)) {
+            
+            String data = "username=" + URLEncoder.encode(smsSettings.getUsername(), "UTF-8");
+            data += "&password=" + (smsSettings.getPassword());
+            data += "&to=" + URLEncoder.encode(mobile, "UTF-8");
+            data += "&from=" + URLEncoder.encode(smsSettings.getSenderId(), "UTF-8");
+            data += "&text=" + URLEncoder.encode(message, "UTF-8");
+            //data += "&type=" + URLEncoder.encode("3", "UTF-8");
+
+            System.out.println(smsSettings.getSmsUrl() + data);
+            URL url = new URL(smsSettings.getSmsUrl() + data);
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            String sResult = "";
+            while ((line = rd.readLine()) != null) {
+                // Process line...
+                sResult = sResult + line + " ";
+            }
+            wr.close();
+            rd.close();
+            return sResult;
+        }else {
+            return null;
+        }
+        
+    } catch (Exception e) {
+        System.out.println("Error SMS " + e);
+        return "Error " + e;
+    }
+}
 }

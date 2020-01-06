@@ -1,0 +1,99 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Messaging</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Messaging</h1>
+    <div class="login-block text-center">
+			<span><font size="5" style="color: green;"
+				th:text="${successMessage}"> </font></span>
+		</div>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">SMS</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">SMS</h3>
+            <div class="box-tools pull-right">
+               <!--  <a href="/branch/add" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a> -->
+            </div>
+        </div>
+        <form data-toggle="validator" role="form" th:action="@{/sms-details}" method="post">
+            <div class="box-body">
+
+                <div class="form-group col-md-2 cc-margin-left">
+                    <label for="Firstname">Appointments From Date</label>
+                    <input type="date" required="true" class="form-control"  name="fromDate" />
+                </div>
+                <div class="form-group col-md-2 cc-margin-left">
+                    <label for="Firstname">Appointments To Date</label>
+                    <input type="date" required="true" class="form-control"  name="toDate" />
+                </div>
+                <div class="form-group col-md-2 cc-margin-bottom">
+                <button type="submit" class="btn btn-primary">Get Data</button>
+            	</div>
+                
+            </div>
+            
+        </form>
+    </div>
+    <form data-toggle="validator" role="form" th:action="@{/send-message}" method="post">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Customer List</h3>
+            <div class="box-tools pull-right">
+                <!-- <a href="/customers/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a> -->
+                <br clear="all" />
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped myTable">
+            <thead>
+                <tr>
+                	<th > Select All </th>
+                    <th>Appointment/Customer ID</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row : ${list}">
+                	<td ><input type="checkbox"/> <input type="hidden" th:value="${row[2]}" name="mobile" /></td>
+                    <td class="tdDisb" th:text="${row[0]}"></td>
+                    <td class="tdDisb" th:text="${row[1]}"></td>
+                    <td class="tdDisb" th:text="${row[2]}"></td>
+                       
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-body no-padding">
+        	<div class="form-group col-md-5">
+						<label for="Firstname">Message</label>
+						<textarea required="true" class="form-control"
+							 id="message" rows="5" cols="40"
+							name="message"></textarea>
+			</div>
+        </div>
+        <div class="box-footer">
+					<button type="submit" class="btn btn-primary">Send SMS</button>
+		</div>
+        
+    </div>
+    </form>
+</div>
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('.myTable').DataTable();
+		});
+		
+		
+	</script>
+</body>
+</html>
