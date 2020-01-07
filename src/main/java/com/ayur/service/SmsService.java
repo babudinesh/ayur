@@ -131,7 +131,6 @@ public String sendMessage(String[] mobileNumbers,String  message) {
             mobile = mobile + "91" +mobileNumbers[i] + ",";
         }
         mobile = mobile.substring(0, mobile.length()-1);
-        System.out.println(mobile);
         if(smsSettings.getStatus().equals(Status.Active)) {
             
             String data = "username=" + URLEncoder.encode(smsSettings.getUsername(), "UTF-8");
