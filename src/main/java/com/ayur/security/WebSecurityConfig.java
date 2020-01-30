@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/bootstrap/**", "/dist/**", "/plugins/**").permitAll()
-                .anyRequest().authenticated()
+                
                 .and()
             .formLogin()
                 .failureUrl("/login?error")
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
                 .permitAll();
-        //http.csrf().disable();
+        http.csrf().disable();
     }
 
     @Autowired
@@ -60,10 +60,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication().dataSource(datasource);
 
         // add new user "user" with password "password" - password will be encrypted
-        if (!userDetailsService.userExists("admin")) {
+        if (!userDetailsService.userExists("naruto")) {
             List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
             authorities.add(new SimpleGrantedAuthority("USER"));
-            User userDetails = new User("admin", encoder.encode("1234"), authorities);
+            User userDetails = new User("naruto", encoder.encode("1234"), authorities);
             userDetailsService.createUser(userDetails);
         }
     }
