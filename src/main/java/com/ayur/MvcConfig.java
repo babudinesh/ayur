@@ -13,7 +13,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("dashboard");
         registry.addViewController("/login").setViewName("login");
     }
-    protected void configure(HttpSecurity http) throws Exception {
+    /*protected void configure(HttpSecurity http) throws Exception {
       http.csrf().disable();
-    }
+    }*/
 }
